@@ -1,0 +1,12 @@
+FROM node:10
+WORKDIR /maputnik
+
+# Only copy package.json to prevent npm install from running on every build
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Build maputnik
+COPY . .
+
+EXPOSE 8888
+RUN npm run start
